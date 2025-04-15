@@ -8,7 +8,7 @@ TARGET = banking_app
 all: $(TARGET)
 
 $(TARGET) : $(SRC)
-	$(CXX) $(CSSFLAGS) -o $@ $^ 
+	$(CXX) $(CXXFLAGS) -o $@ $^ 
 
 clean:
 	rm -f $(TARGET) $(OBJ)
