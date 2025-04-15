@@ -16,7 +16,7 @@ public:
     double getBalance() const;
     std::string getOwnerName() const;
     std::string getAccountNumber() const;
-    void setBalance(double newBalance);
+   
     void setOwnerName(const std::string &name);
     void setAccountNumber(const std::string &number);
 
