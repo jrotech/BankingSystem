@@ -5,7 +5,7 @@
 
 class WithdrawTransaction : public Transaction{
 public:
-    WithdrawTransaction(double amt, std::string &accNum);
+    WithdrawTransaction(double amt, const std::string &accNum);
 
     std::string getType() const override; 
     void display() const override;
