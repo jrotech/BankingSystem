@@ -11,5 +11,5 @@ public:
     TransferTransaction(double amt, std::string &accNum, std::string &toAccNum);
 
     std::string getType() const override; 
-    std::string display() const override;
+    void display() const override;
 };

@@ -15,5 +15,5 @@ public:
     virtual ~Transaction() = default;
 
     virtual std::string getType() const = 0; //pure virtual
-    virtual std::string display() const = 0;
+    virtual void display() const = 0;
 };

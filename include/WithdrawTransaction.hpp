@@ -8,5 +8,5 @@ public:
     WithdrawTransaction(double amt, std::string &accNum);
 
     std::string getType() const override; 
-    std::string display() const override;
+    void display() const override;
 };

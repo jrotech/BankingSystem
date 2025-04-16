@@ -5,8 +5,8 @@
 
 class DepositTransaction : public Transaction{
 public:
-    DepositTransaction(double amt, std::string &accNum);
+    DepositTransaction(double amt, const std::string &accNum);
 
     std::string getType() const override; 
-    std::string display() const override;
+    void display() const override;
 };
