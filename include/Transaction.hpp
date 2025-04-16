@@ -16,4 +16,10 @@ public:
 
     virtual std::string getType() const = 0; //pure virtual
     virtual void display() const = 0;
+
+    int getID() const;
+    double getAmount() const;
+    std::time_t getTimestamp() const;
+    std::string getAccountNumber() const;
+
 };

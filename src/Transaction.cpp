@@ -1,7 +1,8 @@
 #include "Transaction.hpp"
 #include <ctime>
 #include <iostream>
-//Static var
+
+//Static Variable
 int Transaction::nextID = 1;
 
 //Constructor
@@ -9,4 +10,19 @@ Transaction::Transaction(double amt, const std::string &accNum) : amount(amt), a
     std::cout << "Transaction " << transactionID << " created for account " << accountNumber << "\n";
 }
 
-//getType and display are virtual
+//Getters
+int Transaction::getID() const {
+    return transactionID;
+}
+
+double Transaction::getAmount() const {
+    return amount;
+}
+
+std::time_t Transaction::getTimestamp() const {
+    return timestamp;
+}
+
+std::string Transaction::getAccountNumber() const {
+    return accountNumber;
+}
