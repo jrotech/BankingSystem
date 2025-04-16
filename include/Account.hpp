@@ -17,6 +17,7 @@ public:
 
     void deposit(double amount);
     void withdraw(double amount);
+    void transfer(double amount, const std::string &toAccountNumber);
     void displayDetails() const;
     double getBalance() const;
     std::string getOwnerName() const;
