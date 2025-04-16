@@ -7,7 +7,7 @@
 
 //Constructor
 Account::Account(const std::string &accNum, const std::string &ownNm, double initialBalance)
-    : accountNumber(accNum), ownerName(ownNm), balance(initialBalance), {}
+    : accountNumber(accNum), ownerName(ownNm), balance(initialBalance) {}
 
 //Add Transaction
 void Account::addTransaction(std::shared_ptr<Transaction> transaction){
@@ -31,7 +31,7 @@ void Account::withdraw(double amount){
     if (amount <= balance){
         balance -=  amount;
         std::cout<<"You withdrew $" << amount << ". Your balance is now: $" << balance <<"\n";
-        std::shared_ptr<WithdrawTransaction> tx =  std::make_shared<WithdrawTransaction>(amount,accountNumber);
+        std::shared_ptr<WithdrawTransaction> tx =  std::make_shared<DepositTransaction>(amount,accountNumber);
         addTransaction(tx);
     }
     else
