@@ -31,7 +31,7 @@ void Account::withdraw(double amount){
     if (amount <= balance){
         balance -=  amount;
         std::cout<<"You withdrew $" << amount << ". Your balance is now: $" << balance <<"\n";
-        std::shared_ptr<WithdrawTransaction> tx =  std::make_shared<DepositTransaction>(amount,accountNumber);
+        std::shared_ptr<WithdrawTransaction> tx =  std::make_shared<WithdrawTransaction>(amount,accountNumber);
         addTransaction(tx);
     }
     else
