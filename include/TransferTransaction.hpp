@@ -12,4 +12,6 @@ public:
 
     std::string getType() const override; 
     void display() const override;
+    std::string getToAccountNumber() const;
+    
 };
