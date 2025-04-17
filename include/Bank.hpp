@@ -8,7 +8,7 @@ private:
     std::unordered_map<std::string, std::shared_ptr<Account>> accounts;
 
 public:
-    Bank();
+    Bank() = default;
     void addAccount(const std::shared_ptr<Account> &account);
     std::shared_ptr<Account> getAccountByNumber(const std::string &accountNumber) const; 
 
