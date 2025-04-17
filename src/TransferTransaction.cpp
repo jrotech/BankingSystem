@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <ctime>
 
-TransferTransaction::TransferTransaction(double amt, std::string &accNum, std::string &toAccNum) :
+TransferTransaction::TransferTransaction(double amt, const std::string &accNum, const std::string &toAccNum) :
     Transaction(amt, accNum) , toAccountNumber(toAccNum) {}
 
 std::string TransferTransaction::getType() const{
