@@ -9,7 +9,7 @@ private:
 
 public:
     Bank();
-    void addAccount();
-    void getAccountByNumber(const std::string &accountNumber) const; 
+    void addAccount(const std::shared_ptr<Account> &account);
+    std::shared_ptr<Account> getAccountByNumber(const std::string &accountNumber) const; 
 
 };
