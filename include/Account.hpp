@@ -3,6 +3,7 @@
 #include <memory>
 #include <vector>
 #include "Transaction.hpp"
+#include "Bank.hpp"
 
 class Account{
 private:
@@ -17,7 +18,7 @@ public:
 
     void deposit(double amount);
     void withdraw(double amount);
-    void transfer(double amount, const std::string &toAccountNumber);
+    void transfer(const std::shared_ptr<Bank> &bank, double amount, const std::string &toAccountNumber);
     void displayDetails() const;
     double getBalance() const;
     std::string getOwnerName() const;
