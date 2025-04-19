@@ -8,8 +8,8 @@
 #include <iomanip>
 
 //Constructor
-Account::Account(const std::string &accNum, const std::string &ownNm, double initialBalance)
-    : accountNumber(accNum), ownerName(ownNm), balance(initialBalance) {}
+Account::Account(const std::string &accNum, const std::string &ownNm, double initialBalance, double rate = 0.025)
+    : accountNumber(accNum), ownerName(ownNm), balance(initialBalance), interestRate(rate) {}
 
 //Add Transaction
 void Account::addTransaction(std::shared_ptr<Transaction> transaction){
@@ -27,7 +27,16 @@ void Account::deposit(double amount){
     else
         std::cout<<"You ("<<getOwnerName()<<") cannot deposit a negative account\n";
 }
+void Account::applyInterest(){
+    double interest = balance * interestRate;
+    balance +=interest;
+    std::cout << "You (" << ownerName << ") gained $" << std::fixed << std::setprecision(2)
+              << interest << " in interest. New balance: $" << balance << "\n";
+    
+    std::shared_ptr<DepositTransaction> tx = std::make_shared<DepositTransaction>(interest,accountNumber);
+    addTransaction(tx);
 
+}
 //Withdraw
 void Account::withdraw(double amount){
     if (amount <= balance){

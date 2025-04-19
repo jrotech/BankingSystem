@@ -10,7 +10,7 @@ private:
     std::string accountNumber;
     std::string ownerName;
     double balance;
-    double interest;
+    double interestRate;
     std::vector<std::shared_ptr<Transaction>> transactions;
 
 public:
