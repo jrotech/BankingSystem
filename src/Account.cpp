@@ -8,7 +8,7 @@
 #include <iomanip>
 
 //Constructor
-Account::Account(const std::string &accNum, const std::string &ownNm, double initialBalance, double rate = 0.025)
+Account::Account(const std::string &accNum, const std::string &ownNm, double initialBalance, double rate)
     : accountNumber(accNum), ownerName(ownNm), balance(initialBalance), interestRate(rate) {}
 
 //Add Transaction

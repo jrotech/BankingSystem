@@ -1,7 +1,8 @@
 #pragma once
-#include "Account.hpp"
 #include <memory>
 #include <unordered_map>
+
+class Account; // forward declaration
 
 class Bank{
 private:
