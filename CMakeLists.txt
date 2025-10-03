@@ -11,9 +11,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# ---- vcpkg integration (pass in -DCMAKE_TOOLCHAIN_FILE=...) ----
-# If you set VCPKG_ROOT env var, a common pattern is:
-# cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=%VCPKG_ROOT%/scripts/buildsystems/vcpkg.cmake
+
 
 # ---- Dependencies via find_package (vcpkg provides them) ----
 find_package(fmt CONFIG REQUIRED)

@@ -1,9 +1,7 @@
 {
-  "name": "distributed-banking",
-  "version-string": "0.0.1",
   "dependencies": [
     "fmt",
-    "spdlog",
-    { "name": "gtest", "default-features": false }
+    "gtest",
+    "spdlog"
   ]
 }

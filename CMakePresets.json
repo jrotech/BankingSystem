@@ -2,44 +2,15 @@
   "version": 5,
   "configurePresets": [
     {
-      "name": "base",
+      "name": "base-ninja",
       "generator": "Ninja",
-      "binaryDir": "build",
+      "binaryDir": "build-ninja",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
         "ENABLE_CLANG_TIDY": "ON",
-        "BUILD_TESTS": "ON"
-      }
-    },
-    {
-      "name": "base-vcpkg",
-      "inherits": "base",
-      "cacheVariables": {
-        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
-      }
-    },
-    {
-      "name": "asan",
-      "inherits": "base-vcpkg",
-      "cacheVariables": {
-        "ENABLE_ASAN": "ON"
-      }
-    },
-    {
-      "name": "release",
-      "inherits": "base-vcpkg",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release",
-        "ENABLE_CLANG_TIDY": "OFF"
+        "BUILD_TESTS": "ON",
+        "CMAKE_TOOLCHAIN_FILE": "C:/vcpkg/scripts/buildsystems/vcpkg.cmake"
       }
     }
-  ],
-  "buildPresets": [
-    { "name": "build", "configurePreset": "base-vcpkg" },
-    { "name": "asan-build", "configurePreset": "asan" },
-    { "name": "rel-build", "configurePreset": "release" }
-  ],
-  "testPresets": [
-    { "name": "ctest", "configurePreset": "base-vcpkg" }
   ]
 }
