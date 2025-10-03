@@ -19,3 +19,9 @@
 # IDE
 .vscode/
 .clangd/
+
+# CMake Outputs
+CMakeUserPresets.json
+build-*/
+CMakeCache.txt
+CMakeFiles/
