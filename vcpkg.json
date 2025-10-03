@@ -1,7 +1,6 @@
 {
   "name": "distributed-banking",
   "version-string": "0.0.1",
-  "builtin-baseline": "f3c4b6b9f2f5467b9c1d2ac1f3c85a4f9a6a2e33",
   "dependencies": [
     "fmt",
     "spdlog",

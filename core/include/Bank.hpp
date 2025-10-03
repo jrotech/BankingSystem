@@ -4,13 +4,12 @@
 
 class Account; // forward declaration
 
-class Bank{
-private:
+class Bank {
+  private:
     std::unordered_map<std::string, std::shared_ptr<Account>> accounts;
 
-public:
+  public:
     Bank() = default;
-    void addAccount(const std::shared_ptr<Account> &account);
-    std::shared_ptr<Account> getAccountByNumber(const std::string &accountNumber) const; 
-
+    void addAccount(const std::shared_ptr<Account>& account);
+    std::shared_ptr<Account> getAccountByNumber(const std::string& accountNumber) const;
 };
