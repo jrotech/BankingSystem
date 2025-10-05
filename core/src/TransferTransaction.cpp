@@ -1,6 +1,6 @@
 #include "TransferTransaction.hpp"
 
-#include <ctime>
+#include <fmt/chrono.h>
 #include <iomanip>
 #include <iostream>
 
@@ -11,10 +11,10 @@ std::string TransferTransaction::getType() const { return "Transfer"; }
 std::string TransferTransaction::getToAccountNumber() const { return toAccountNumber; }
 void TransferTransaction::display() const {
     std::time_t ts = getTimestamp();
-
+    std::tm local_tm = *std::localtime(&ts);
     std::cout << "[Transfer] " << "Transaction ID: " << getID() << "\n"
               << "From Account: " << getAccountNumber() << "\n"
               << "To Account: " << getToAccountNumber() << "\n"
               << "Amount: $" << std::fixed << std::setprecision(2) << getAmount() << "\n"
-              << "Date: " << std::ctime(&ts);
+              << "Date: " << fmt::format("{:%Y-%m-%d %H:%M:%S}", local_tm) << "\n";
 }

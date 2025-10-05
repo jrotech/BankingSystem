@@ -1,6 +1,5 @@
 #include "Transaction.hpp"
 
-#include <ctime>
 #include <iostream>
 
 // Static Variable
