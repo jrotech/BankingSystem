@@ -4,7 +4,8 @@ add_library(core STATIC
   src/Transaction.cpp
   src/DepositTransaction.cpp
   src/WithdrawTransaction.cpp
-  src/TransferTransaction.cpp
+  src/TransferTransaction.cpp 
+  src/TimeUtil.cpp
 )
 target_include_directories(core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(core PUBLIC fmt::fmt spdlog::spdlog)

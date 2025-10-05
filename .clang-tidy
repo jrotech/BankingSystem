@@ -10,4 +10,3 @@ Checks: >
   misc-*
 WarningsAsErrors: '*'
 HeaderFilterRegex: '^(core|services)/'
-AnalyzeTemporaryDtors: true
