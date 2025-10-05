@@ -51,7 +51,7 @@ jobs:
           VCPKG_HOST_TRIPLET:    ${{ runner.os == 'Windows' && 'x64-mingw-dynamic' || 'x64-linux' }}
         with:
           vcpkgJsonGlob: 'vcpkg.json'
-          runVcpkgInstall: true
+          runVcpkgInstall: false
           # action clones vcpkg under the workspace, caching can be enabled later.
 
       # --- Configure ---
