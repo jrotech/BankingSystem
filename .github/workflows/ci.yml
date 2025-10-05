@@ -4,29 +4,85 @@ on: [push, pull_request]
 jobs:
   build-test:
     strategy:
+      fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        include:
+          # Linux (clang + Ninja + vcpkg x64-linux)
+          - os: ubuntu-latest
+            configure: linux-clang-ninja
+            build:     build-linux
+            test:      test-linux
+
+          # Windows (MSYS2 clang64 + Ninja + vcpkg x64-mingw-dynamic)
+          - os: windows-latest
+            configure: win-clang64-ninja
+            build:     build-win
+            test:      test-win
+
     runs-on: ${{ matrix.os }}
+
     steps:
       - uses: actions/checkout@v4
 
+      # --- Linux toolchain ---
+      - name: Install Linux toolchain
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang clang-tidy clang-format ninja-build
+
+      # --- Windows toolchain (MSYS2 clang64) ---
+      - name: Setup MSYS2 clang64
+        if: runner.os == 'Windows'
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: clang64
+          update: true
+          install: >
+            clang64/mingw-w64-clang-x86_64-clang
+            clang64/mingw-w64-clang-x86_64-clang-tools-extra
+            clang64/mingw-w64-clang-x86_64-ninja
+
+      # --- vcpkg (manifest mode) with correct triplet ---
       - name: Setup vcpkg
         uses: lukka/run-vcpkg@v11
+        env:
+          VCPKG_DEFAULT_TRIPLET: ${{ runner.os == 'Windows' && 'x64-mingw-dynamic' || 'x64-linux' }}
+          VCPKG_HOST_TRIPLET:    ${{ runner.os == 'Windows' && 'x64-mingw-dynamic' || 'x64-linux' }}
         with:
           vcpkgJsonGlob: 'vcpkg.json'
           runVcpkgInstall: true
+          # action clones vcpkg under the workspace, caching can be enabled later.
 
-      - name: Install LLVM tools (*nix)
-        if: runner.os != 'Windows'
-        run: |
-          sudo apt-get update || true
-          sudo apt-get install -y clang-format clang-tidy ninja-build
-
+      # --- Configure ---
       - name: Configure
-        run: cmake --preset base-vcpkg
+        shell: bash
+        run: |
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            export PATH="/c/msys64/clang64/bin:$PATH"
+            export VCPKG_ROOT="$PWD/vcpkg"   # run-vcpkg clones vcpkg here by default
+          else
+            export VCPKG_ROOT="$VCPKG_INSTALLATION_ROOT"
+          fi
+          cmake --preset ${{ matrix.configure }}
 
+      # --- clang-format check ---
+      - name: Format check
+        shell: bash
+        run: |
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            export PATH="/c/msys64/clang64/bin:$PATH"
+          fi
+          files=$(git ls-files '*.h' '*.hh' '*.hpp' '*.c' '*.cc' '*.cxx' '*.cpp')
+          if [ -n "$files" ]; then
+            clang-format --version
+            for f in $files; do clang-format -style=file -Werror --dry-run "$f"; done
+          fi
+
+      # --- Build ---
       - name: Build
-        run: cmake --build --preset build -j
+        run: cmake --build --preset ${{ matrix.build }} -j
 
+      # --- Test ---
       - name: Test
-        run: ctest --preset ctest --output-on-failure
+        run: ctest --preset ${{ matrix.test }} --output-on-failure
