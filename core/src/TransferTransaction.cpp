@@ -12,8 +12,7 @@ std::string TransferTransaction::getToAccountNumber() const { return toAccountNu
 void TransferTransaction::display() const {
     std::time_t ts = getTimestamp();
 
-    std::cout << "[Transfer] "
-              << "Transaction ID: " << getID() << "\n"
+    std::cout << "[Transfer] " << "Transaction ID: " << getID() << "\n"
               << "From Account: " << getAccountNumber() << "\n"
               << "To Account: " << getToAccountNumber() << "\n"
               << "Amount: $" << std::fixed << std::setprecision(2) << getAmount() << "\n"

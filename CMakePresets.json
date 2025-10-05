@@ -13,8 +13,8 @@
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
         "VCPKG_TARGET_TRIPLET": "x64-mingw-dynamic",
         "VCPKG_HOST_TRIPLET": "x64-mingw-dynamic",
-        "CMAKE_C_COMPILER": "C:/msys64/clang64/bin/clang.exe",
-        "CMAKE_CXX_COMPILER": "C:/msys64/clang64/bin/clang++.exe"
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++"
       }
     },
     {
