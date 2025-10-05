@@ -8,7 +8,7 @@ int Transaction::nextID = 1;
 
 // Constructor
 Transaction::Transaction(double amt, const std::string& accNum)
-    : amount(amt), accountNumber(accNum), transactionID(nextID++), timestamp(std::time(nullptr)) {
+    : transactionID(nextID++), amount(amt), timestamp(std::time(nullptr)), accountNumber(accNum) {
     std::cout << "Transaction " << transactionID << " created for account " << accountNumber << "\n";
 }
 

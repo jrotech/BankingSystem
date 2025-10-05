@@ -23,6 +23,25 @@ if (ENABLE_CLANG_TIDY)
   endif()
 endif()
 
+# Sanitizers (Clang/GCC) ----
+option(ENABLE_ASAN "Enable AddressSanitizer" OFF)
+option(ENABLE_UBSAN "Enable UndefinedBehaviorSanitizer" OFF)
+
+set(_san_list "")
+if (ENABLE_ASAN)
+  list(APPEND _san_list "address")
+endif()
+if (ENABLE_UBSAN)
+  list(APPEND _san_list "undefined")
+endif()
+
+if (_san_list)
+  string(JOIN "," _san_joined ${_san_list})
+  add_compile_options(-fsanitize=${_san_joined} -fno-omit-frame-pointer)
+  add_link_options(-fsanitize=${_san_joined})
+  add_compile_options(-fno-sanitize-recover=undefined)
+endif()
+
 # Warnings-as-errors (clang/gcc)
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
   add_compile_options(-Wall -Wextra -Wpedantic -Werror)

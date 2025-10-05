@@ -6,50 +6,78 @@
       "displayName": "Windows (MSYS2 clang64) + Ninja",
       "generator": "Ninja",
       "binaryDir": "build-win-clang64",
-      "environment": {
-      "VCPKG_ROOT": "C:/vcpkg"
-      },
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
         "BUILD_TESTS": "ON",
         "ENABLE_CLANG_TIDY": "ON",
-
-        "CMAKE_MAKE_PROGRAM": "C:/Ninja/ninja.exe",
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
         "VCPKG_TARGET_TRIPLET": "x64-mingw-dynamic",
         "VCPKG_HOST_TRIPLET": "x64-mingw-dynamic",
-
         "CMAKE_C_COMPILER": "C:/msys64/clang64/bin/clang.exe",
         "CMAKE_CXX_COMPILER": "C:/msys64/clang64/bin/clang++.exe"
+      },
+      "environment": {
+        "PATH": "C:/msys64/clang64/bin;",
+        "VCPKG_ROOT": "C:/vcpkg"
       }
     },
+    {
+      "name": "win-clang64-asan",
+      "inherits": "win-clang64-ninja",
+      "binaryDir": "build-win-clang64-asan",
+      "cacheVariables": { "ENABLE_ASAN": "ON" }
+    },
+    {
+      "name": "win-clang64-ubsan",
+      "inherits": "win-clang64-ninja",
+      "binaryDir": "build-win-clang64-ubsan",
+      "cacheVariables": { "ENABLE_UBSAN": "ON" }
+    },
+
     {
       "name": "linux-clang-ninja",
       "displayName": "Linux (clang) + Ninja",
       "generator": "Ninja",
       "binaryDir": "build-linux-clang",
-      "environment": {
-      "VCPKG_ROOT": "C:/vcpkg"
-      },
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
         "BUILD_TESTS": "ON",
         "ENABLE_CLANG_TIDY": "ON",
-
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
         "VCPKG_TARGET_TRIPLET": "x64-linux",
-
         "CMAKE_C_COMPILER": "clang",
         "CMAKE_CXX_COMPILER": "clang++"
       }
+    },
+    {
+      "name": "linux-clang-asan",
+      "inherits": "linux-clang-ninja",
+      "binaryDir": "build-linux-clang-asan",
+      "cacheVariables": { "ENABLE_ASAN": "ON" }
+    },
+    {
+      "name": "linux-clang-ubsan",
+      "inherits": "linux-clang-ninja",
+      "binaryDir": "build-linux-clang-ubsan",
+      "cacheVariables": { "ENABLE_UBSAN": "ON" }
     }
   ],
   "buildPresets": [
     { "name": "build-win", "configurePreset": "win-clang64-ninja", "jobs": 8 },
-    { "name": "build-linux", "configurePreset": "linux-clang-ninja", "jobs": 8 }
+    { "name": "build-win-asan", "configurePreset": "win-clang64-asan", "jobs": 8 },
+    { "name": "build-win-ubsan", "configurePreset": "win-clang64-ubsan", "jobs": 8 },
+
+    { "name": "build-linux", "configurePreset": "linux-clang-ninja", "jobs": 8 },
+    { "name": "build-linux-asan", "configurePreset": "linux-clang-asan", "jobs": 8 },
+    { "name": "build-linux-ubsan", "configurePreset": "linux-clang-ubsan", "jobs": 8 }
   ],
   "testPresets": [
     { "name": "test-win", "configurePreset": "win-clang64-ninja" },
-    { "name": "test-linux", "configurePreset": "linux-clang-ninja" }
+    { "name": "test-win-asan", "configurePreset": "win-clang64-asan" },
+    { "name": "test-win-ubsan", "configurePreset": "win-clang64-ubsan" },
+
+    { "name": "test-linux", "configurePreset": "linux-clang-ninja" },
+    { "name": "test-linux-asan", "configurePreset": "linux-clang-asan" },
+    { "name": "test-linux-ubsan", "configurePreset": "linux-clang-ubsan" }
   ]
 }
