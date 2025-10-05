@@ -11,7 +11,8 @@ std::string TransferTransaction::getType() const { return "Transfer"; }
 std::string TransferTransaction::getToAccountNumber() const { return toAccountNumber; }
 void TransferTransaction::display() const {
     std::time_t ts = getTimestamp();
-    std::tm local_tm = *std::localtime(&ts);
+    std::tm local_tm{};
+    localtime_s(&local_tm, &ts);
     std::cout << "[Transfer] " << "Transaction ID: " << getID() << "\n"
               << "From Account: " << getAccountNumber() << "\n"
               << "To Account: " << getToAccountNumber() << "\n"

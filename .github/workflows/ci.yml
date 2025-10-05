@@ -59,10 +59,10 @@ jobs:
         shell: bash
         run: |
           if [ "${{ runner.os }}" = "Windows" ]; then
+            rm -rf build-win-clang64 || true
             export PATH="/c/msys64/clang64/bin:$PATH"
             export VCPKG_ROOT="$PWD/vcpkg"   # run-vcpkg clones vcpkg here by default
-          else
-            export VCPKG_ROOT="$VCPKG_INSTALLATION_ROOT"
+  
           fi
           cmake --preset ${{ matrix.configure }}
 
@@ -70,9 +70,6 @@ jobs:
       - name: Format check
         shell: bash
         run: |
-          if [ "${{ runner.os }}" = "Windows" ]; then
-            export PATH="/c/msys64/clang64/bin:$PATH"
-          fi
           files=$(git ls-files '*.h' '*.hh' '*.hpp' '*.c' '*.cc' '*.cxx' '*.cpp')
           if [ -n "$files" ]; then
             clang-format --version

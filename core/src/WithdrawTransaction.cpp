@@ -10,7 +10,8 @@ WithdrawTransaction::WithdrawTransaction(double amt, const std::string& accNum) 
 std::string WithdrawTransaction::getType() const { return "Withdraw"; }
 void WithdrawTransaction::display() const {
     std::time_t ts = getTimestamp();
-    std::tm local_tm = *std::localtime(&ts);
+    std::tm local_tm{};
+    localtime_s(&local_tm, &ts);
     std::cout << "[Withdraw] " << "Transaction ID: " << getID() << "\n"
               << "Account: " << getAccountNumber() << "\n"
               << "Amount: $" << std::fixed << std::setprecision(2) << getAmount() << "\n"
